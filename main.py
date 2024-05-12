@@ -153,8 +153,15 @@ class Game:
     def run_menu(self):
         running = True
         loading_image_x, loading_image_y = self.screen_size[0] // 2 - self.background_image.get_width() // 2, 0
+        self.screen.blit(self.background_image, (loading_image_x, loading_image_y))
+        quick_text(["Собирайте монетки, ешьте кораллы!",
+                    "Если соберёте достаточно, можете съесть",
+                    "и некоторых акул!",
+                    "",
+                    "нажмите для продолжения"], 10, 10,
+                   self.screen)
+        self.display.flip()
         while running:
-            self.screen.blit(self.background_image, (loading_image_x, loading_image_y))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -162,13 +169,6 @@ class Game:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     running = False
                     self.game_mode = 0
-            quick_text(["Собирайте монетки, ешьте кораллы!",
-                        "Если соберёте достаточно, можете съесть",
-                        "и некоторых акул!",
-                        "",
-                        "нажмите для продолжения"], 10, 10,
-                       self.screen)
-            self.display.flip()
 
     def generate_enemies(self):
         res = []
